@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+.build/
+dist/
+/audio-clock
+*.log
+*.mp4
+*.png
+*.jpg
+*.jpeg
+*.zip
+*.pyz
+
