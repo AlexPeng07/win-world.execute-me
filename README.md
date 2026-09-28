@@ -1,4 +1,4 @@
-# world.execute(me); —MV
+# world.execute(me); —ascii
 
 ![world.execute(me); MV 画面](docs/images/mv-cover.png)
 
