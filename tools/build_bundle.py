@@ -13,6 +13,8 @@ FILES = ('player.py', 'scenes.py', 'audio-clock', 'config.json', 'lyrics.json',
 
 
 def main():
+    if not (ROOT/'media/song.mp3').is_file():
+        raise SystemExit('请先将本地音频放入 media/song.mp3；音频不会提交到仓库。')
     subprocess.run(['/bin/zsh', str(ROOT/'build-audio.sh'), '--universal'], check=True)
     output = ROOT/'dist'
     output.mkdir(exist_ok=True)

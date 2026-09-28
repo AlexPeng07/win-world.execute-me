@@ -12,3 +12,10 @@ dist/
 *.zip
 *.pyz
 
+
+# Local audio input is embedded only in release packages.
+/media/
+*.mp3
+*.wav
+*.flac
+*.m4a

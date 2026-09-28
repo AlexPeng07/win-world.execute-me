@@ -36,7 +36,7 @@ python3 world-execute-mv.pyz --start 158.7 --autoplay
 
 ## 从源码运行
 
-源码中的音乐位于 `media/song.mp3`，默认路径相对项目目录解析。不要直接移动单个 `player.py`。
+仓库不保存音频文件。从源码运行或重新打包前，请将自己的音频放到本地 `media/song.mp3`。该目录已被 Git 忽略，不会提交到仓库。使用 Release 播放包无需此步骤。
 
 首次构建音频组件需要 Apple Command Line Tools（含 Swift 编译器）：
 
@@ -69,6 +69,6 @@ python3 tests/test_bundle.py
 
 ## 收录范围
 
-本仓库为私有项目归档，包含当前播放器、音乐、字幕、频谱和构建工具。
+本仓库为私有项目归档，包含当前播放器、字幕、频谱和构建工具。音乐仅内嵌于 Release 播放包。
 
 原曲与歌词：Mili《world.execute(me);》。本项目是个人创作与备份，未对原曲、歌词或其他第三方素材授予额外使用许可。
