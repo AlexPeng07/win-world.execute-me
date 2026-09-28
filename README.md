@@ -1,6 +1,6 @@
 # world.execute(me); — CRT 终端 MV
 
-Mili《world.execute(me);》的字符动画 MV。支持中英字幕、原曲同步播放和 cool-retro-term 的 CRT 外观。包含最新心形填充修正、EIN / DOS / TROIS / NE / FEM / LIU 报数，以及学习与推理崩坏等场景。
+Mili《world.execute(me);》的字符动画 MV。支持中英字幕、原曲同步播放和终端字符动画。包含最新心形填充修正、EIN / DOS / TROIS / NE / FEM / LIU 报数，以及学习与推理崩坏等场景。
 
 ## 单文件运行（推荐）
 
@@ -8,13 +8,13 @@ Mili《world.execute(me);》的字符动画 MV。支持中英字幕、原曲同�
 
 需要 **macOS 12 或更新版本、Python 3.9 或更新版本**。音频组件同时包含 Apple Silicon 和 Intel 架构。终端播放器自身只使用 Python 标准库。
 
-在 cool-retro-term 中进入解压目录运行：
+在 macOS「终端」中进入解压目录运行：
 
 ```sh
 python3 world-execute-mv.pyz
 ```
 
-也可双击 `运行单文件.command`，在系统终端中播放。按空格开始；CRT 外观需安装 cool-retro-term，并在其设置中导入随包提供的 `琥珀双语.json` 配置。推荐全屏，终端至少 64 列 × 24 行，128 列 × 44 行及以上效果更好。
+也可双击 `运行单文件.command`，在系统终端中播放。按空格开始。无需额外终端应用或主题文件。推荐全屏，终端至少 64 列 × 24 行，128 列 × 44 行及以上效果更好。
 
 ```sh
 # 从 2:38.7 开始直接播放
@@ -50,7 +50,7 @@ xcode-select --install
 ./run.sh
 ```
 
-启动脚本在缺少 `audio-clock` 时自动编译本机架构。`播放MV.command` 可启动安装在 `/Applications` 的 cool-retro-term；其运行中的窗口不会被强制关闭。
+启动脚本在缺少 `audio-clock` 时自动编译本机架构。双击 `播放MV.command` 可在 macOS 系统终端中运行源码版。
 
 ## 重新打包
 
@@ -62,13 +62,19 @@ python3 tests/test_bundle.py
 构建输出在 `dist/`：
 
 - `world-execute-mv.pyz`：内嵌音乐的单文件播放器。
-- `world-execute-mv-macos.zip`：包含播放器、启动器、说明和 CRT 配置的分发包。
+- `world-execute-mv-macos.zip`：包含播放器、启动器、说明的分发包。
 - `SHA256SUMS.txt`：下载校验值。
 
 音频以 macOS 音频时钟驱动画面；暂停、跳转时字幕与动画跟随音频时间。构建会生成 universal 音频组件，并在单文件包内记录各资源 SHA-256 以检查完整性。
 
 ## 收录范围
 
-本仓库为私有项目归档，包含当前播放器、音乐、字幕、频谱、CRT 配置和构建工具。**不包含导出的 MP4 或庆祝图**，也不包含开发期间的临时文件和旧版备份。
+本仓库为私有项目归档，包含当前播放器、音乐、字幕、频谱和构建工具。**不包含导出的 MP4 或庆祝图**，也不包含开发期间的临时文件和旧版备份。
 
 原曲与歌词：Mili《world.execute(me);》。本项目是个人创作与备份，未对原曲、歌词或其他第三方素材授予额外使用许可。
+
+## 创作档案
+
+另行提供 `world-execute-mv-creation.zip`：包含可离线浏览的图文创作过程、对话摘录、修改截图与场景时间线。
+
+分发播放器保留字符画、颜色和同步字幕；系统终端不会自动呈现历史截图中的曲面与辉光效果。

@@ -220,7 +220,7 @@ class Audio:
             except (BrokenPipeError,subprocess.TimeoutExpired):self.proc.terminate()
 
 def run(args,film):
-    if not sys.stdin.isatty():raise RuntimeError('请在 cool-retro-term 或其他终端中运行。')
+    if not sys.stdin.isatty():raise RuntimeError('请在 macOS 终端中运行。')
     # Write to the controlling terminal even when a command wrapper pipes stdout.
     terminal_fd=os.open('/dev/tty',os.O_RDWR)
     sys.stdout=os.fdopen(os.dup(terminal_fd),'w',encoding='utf-8',buffering=1)
