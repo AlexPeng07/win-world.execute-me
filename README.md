@@ -1,4 +1,4 @@
-# world.execute(me); —MV
+# world.execute(me); —ascii
 
 ![world.execute(me); MV 画面](docs/images/mv-cover.png)
 
@@ -6,7 +6,7 @@ Mili《world.execute(me);》的字符动画 MV。支持中英字幕、原曲同�
 
 ## 单文件运行（推荐）
 
-从本私有仓库的 **Releases** 下载 `world-execute-mv-macos.zip` 并解压。音乐、动画、字幕、频谱数据和音频播放组件已经内嵌在 `world-execute-mv.pyz` 内，无需另外下载或指定 MP3。
+从本仓库的 **Releases** 下载 `world-execute-mv-macos.zip` 并解压。音乐、动画、字幕、频谱数据和音频播放组件已经内嵌在 `world-execute-mv.pyz` 内，无需另外下载或指定 MP3。
 
 需要 **macOS 12 或更新版本、Python 3.9 或更新版本**。音频组件同时包含 Apple Silicon 和 Intel 架构。终端播放器自身只使用 Python 标准库。
 
@@ -71,6 +71,6 @@ python3 tests/test_bundle.py
 
 ## 收录范围
 
-本仓库为私有项目归档，包含当前播放器、字幕、频谱和构建工具。音乐仅内嵌于 Release 播放包。
+本仓库为项目归档，包含当前播放器、字幕、频谱和构建工具。音乐仅内嵌于 Release 播放包。
 
 原曲与歌词：Mili《world.execute(me);》。本项目是个人创作与备份，未对原曲、歌词或其他第三方素材授予额外使用许可。
