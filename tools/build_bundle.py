@@ -35,7 +35,8 @@ def main():
     # A small convenient download with the single-file player and instructions.
     with zipfile.ZipFile(output/'world-execute-mv-macos.zip', 'w', zipfile.ZIP_DEFLATED) as archive:
         for name, path in [('world-execute-mv.pyz', package), ('README.md', ROOT/'README.md'),
-                           ('运行单文件.command', ROOT/'运行单文件.command')]:
+                           ('运行单文件.command', ROOT/'运行单文件.command'),
+                           ('docs/images/celebration.png', ROOT/'docs/images/celebration.png')]:
             archive.write(path, 'world-execute-mv/'+name)
     paths = [package, output/'world-execute-mv-macos.zip']
     (output/'SHA256SUMS.txt').write_text(''.join(

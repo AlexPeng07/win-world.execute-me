@@ -1,4 +1,4 @@
-# world.execute(me); — CRT 终端 MV
+# world.execute(me); —MV
 
 ![world.execute(me); 庆祝插画](docs/images/celebration.png)
 
