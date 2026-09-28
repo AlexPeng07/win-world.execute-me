@@ -1,8 +1,8 @@
 # world.execute(me); —ascii
 
-![world.execute(me); MV 画面](docs/images/mv-cover.png)
+![world.execute(me);](docs/images/mv-cover.png)
 
-Mili《world.execute(me);》的字符动画 MV。支持中英字幕、原曲同步播放和终端字符动画。
+Mili《world.execute(me);》的字符动画。支持中英字幕、原曲同步播放和终端字符动画。
 
 ## 单文件运行（推荐）
 
