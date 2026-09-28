@@ -1,6 +1,8 @@
 # world.execute(me); — CRT 终端 MV
 
-Mili《world.execute(me);》的字符动画 MV。支持中英字幕、原曲同步播放和终端字符动画。包含最新心形填充修正、EIN / DOS / TROIS / NE / FEM / LIU 报数，以及学习与推理崩坏等场景。
+![world.execute(me); 庆祝插画](docs/images/celebration.png)
+
+Mili《world.execute(me);》的字符动画 MV。支持中英字幕、原曲同步播放和终端字符动画。
 
 ## 单文件运行（推荐）
 
@@ -36,7 +38,7 @@ python3 world-execute-mv.pyz --start 158.7 --autoplay
 
 ## 从源码运行
 
-仓库不保存音频文件。从源码运行或重新打包前，请将自己的音频放到本地 `media/song.mp3`。该目录已被 Git 忽略，不会提交到仓库。使用 Release 播放包无需此步骤。
+仓库不保存音频文件。从源码运行或重新打包前，请将自己的音频放到本地 `media/song.mp3`。使用 Release 播放包无需此步骤。
 
 首次构建音频组件需要 Apple Command Line Tools（含 Swift 编译器）：
 

@@ -19,3 +19,6 @@ dist/
 *.wav
 *.flac
 *.m4a
+
+# README artwork
+!/docs/images/celebration.png
