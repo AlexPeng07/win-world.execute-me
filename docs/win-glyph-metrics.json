@@ -1,0 +1,204 @@
+{
+  "host": "windows-terminal",
+  "dpi_mode": "per-monitor-v2",
+  "repeats": 40,
+  "row_stride": 7,
+  "console": {
+    "columns": 179,
+    "rows": 56,
+    "source": "os.get_terminal_size(stdout)"
+  },
+  "ambiguous_count": 34,
+  "cell_px": [
+    14.2927,
+    14.2927,
+    14.2927,
+    14.2927,
+    14.2927,
+    14.2927
+  ],
+  "results": {
+    "中": {
+      "cells": 1.98,
+      "shift_px": 560,
+      "console_row": 9
+    },
+    "·": {
+      "cells": 1.0,
+      "shift_px": 0,
+      "console_row": 16
+    },
+    "π": {
+      "cells": 1.0,
+      "shift_px": 0,
+      "console_row": 23
+    },
+    "→": {
+      "cells": 1.0,
+      "shift_px": 0,
+      "console_row": 30
+    },
+    "≈": {
+      "cells": 1.0,
+      "shift_px": 0,
+      "console_row": 37
+    },
+    "─": {
+      "cells": 1.0,
+      "shift_px": 0,
+      "console_row": 44
+    },
+    "│": {
+      "cells": 1.0,
+      "shift_px": 0,
+      "console_row": 9
+    },
+    "┊": {
+      "cells": 1.0,
+      "shift_px": 0,
+      "console_row": 16
+    },
+    "┌": {
+      "cells": 1.0,
+      "shift_px": 0,
+      "console_row": 23
+    },
+    "┐": {
+      "cells": 1.0,
+      "shift_px": 0,
+      "console_row": 30
+    },
+    "└": {
+      "cells": 1.0,
+      "shift_px": 0,
+      "console_row": 37
+    },
+    "┘": {
+      "cells": 1.0,
+      "shift_px": 0,
+      "console_row": 44
+    },
+    "═": {
+      "cells": 1.0,
+      "shift_px": 0,
+      "console_row": 9
+    },
+    "║": {
+      "cells": 1.0,
+      "shift_px": 0,
+      "console_row": 16
+    },
+    "╔": {
+      "cells": 1.0,
+      "shift_px": 0,
+      "console_row": 23
+    },
+    "╗": {
+      "cells": 1.0,
+      "shift_px": 0,
+      "console_row": 30
+    },
+    "╚": {
+      "cells": 1.0,
+      "shift_px": 0,
+      "console_row": 37
+    },
+    "╝": {
+      "cells": 1.0,
+      "shift_px": 0,
+      "console_row": 44
+    },
+    "╱": {
+      "cells": 1.0,
+      "shift_px": 0,
+      "console_row": 9
+    },
+    "╲": {
+      "cells": 1.0,
+      "shift_px": 0,
+      "console_row": 16
+    },
+    "█": {
+      "cells": 1.0,
+      "shift_px": 0,
+      "console_row": 23
+    },
+    "▌": {
+      "cells": 1.0,
+      "shift_px": 0,
+      "console_row": 30
+    },
+    "▒": {
+      "cells": 1.0,
+      "shift_px": 0,
+      "console_row": 37
+    },
+    "▓": {
+      "cells": 1.0,
+      "shift_px": 0,
+      "console_row": 44
+    },
+    "▲": {
+      "cells": 1.0,
+      "shift_px": 0,
+      "console_row": 9
+    },
+    "△": {
+      "cells": 1.0,
+      "shift_px": 0,
+      "console_row": 16
+    },
+    "▶": {
+      "cells": 1.0,
+      "shift_px": 0,
+      "console_row": 23
+    },
+    "▷": {
+      "cells": 1.0,
+      "shift_px": 0,
+      "console_row": 30
+    },
+    "▼": {
+      "cells": 1.0,
+      "shift_px": 0,
+      "console_row": 37
+    },
+    "○": {
+      "cells": 1.0,
+      "shift_px": 0,
+      "console_row": 44
+    },
+    "●": {
+      "cells": 1.0,
+      "shift_px": 0,
+      "console_row": 9
+    },
+    "◯": {
+      "cells": 1.0,
+      "shift_px": 0,
+      "console_row": 16
+    },
+    "♀": {
+      "cells": 1.0,
+      "shift_px": 0,
+      "console_row": 23
+    },
+    "♂": {
+      "cells": 1.0,
+      "shift_px": 0,
+      "console_row": 30
+    },
+    "♥": {
+      "cells": 1.0,
+      "shift_px": 0,
+      "console_row": 37
+    }
+  },
+  "control_cjk_cells": 1.98,
+  "instrument_self_check": "ok",
+  "ambiguous_measured": 34,
+  "ambiguous_wide": [],
+  "unresolved": [],
+  "verdict": "ALL_NARROW",
+  "bmp": "F:\\AllProjects\\playground\\world.execute(me); —ascii\\.build\\calibrate-screen.bmp"
+}

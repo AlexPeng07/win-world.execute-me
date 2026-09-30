@@ -4,6 +4,17 @@
 
 Mili《world.execute(me);》的字符动画。支持中英字幕、原曲同步播放和终端字符动画。
 
+## 本仓库当前是 Windows 版
+
+**双击 `播放MV.cmd` 即可播放**，细节见 [WINDOWS.md](WINDOWS.md)，逐轮实测与判据变更记录在
+[docs/windows-log.md](docs/windows-log.md)。
+
+这份本地副本已就地改为只服务 Windows：音频时钟换成 Media Foundation（`win/audioclock.ps1`），
+终端输入换成 `win/winconsole.py`，并删除了 `AudioClock.swift`、`run.sh`、`build-audio.sh`、
+`播放MV.command`、`运行单文件.command` 与 `tools/` 下的 macOS 打包脚本（历史在 `git log`）。
+下面「单文件运行」「从源码运行」「重新打包」三节保留上游原文，描述的是已删除的 macOS 路径；
+画面、字幕与频谱数据与上游逐帧一致（`tests/test_win_render.py` 对固定 commit 做等价性断言）。
+
 ## 单文件运行（推荐）
 
 从本仓库的 **Releases** 下载 `world-execute-mv-macos.zip` 并解压。音乐、动画、字幕、频谱数据和音频播放组件已经内嵌在 `world-execute-mv.pyz` 内，无需另外下载或指定 MP3。
@@ -72,5 +83,8 @@ python3 tests/test_bundle.py
 ## 收录范围
 
 本仓库为项目归档，包含当前播放器、字幕、频谱和构建工具。音乐仅内嵌于 Release 播放包。
+
+（本 Windows 副本已移除 macOS 的构建工具与打包脚本，只保留播放器、字幕、频谱、Windows
+适配层 `win/` 与两套测试；上面这句保留上游原文以说明出处。）
 
 原曲与歌词：Mili《world.execute(me);》。本项目是个人创作与备份，未对原曲、歌词或其他第三方素材授予额外使用许可。
