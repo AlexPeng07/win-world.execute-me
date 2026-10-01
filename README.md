@@ -58,7 +58,7 @@ C:\Python314\python.exe player.py --start 158.7 --autoplay
 ```bat
 player.py --backend none             :: 不出声，只放画面（这一档不需要音频文件）
 player.py --snapshot 159.85 --plain  :: 不开终端也能看某一帧
-player.py --report f.json --start 60 --stop-after 68 --autoplay
+player.py --report .build\f.json --start 60 --stop-after 68 --autoplay
 ```
 
 `--report` 写出的 JSON 会记下帧数、真实窗口尺寸、**尺寸是谁报的**、最坏一帧耗时、

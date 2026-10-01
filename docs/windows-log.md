@@ -305,3 +305,72 @@
   6 条全部命中（第一版自检按仓库根解析，误报两条"死链"，是尺子错不是文件错）。
 - 顺手把两句只在当时语境成立的话移出 README："第 3 段以前用的是 MCI…现在换成活的"
   （历史，本就在上一轮记过）与"有人把 encoding 改回去了"（假设性指责，改成事实句）。
+
+## 第七轮 · 2026-10-01 · 发布前：gitignore 复核、安全检查、README 一行并入上一提交
+
+- 用户要去发 GitHub，四件事：`.gitignore` 对不对、安全性、README 新加的一行并入上一次提交、
+  上线前核验。
+- **`.gitignore` 的判据不是"读一遍觉得对"，是干净房重跑 `git add`**：在 `.build/ignore-lab`
+  `git init` 一份空仓库、只放这份 `.gitignore`，铺出 `media/song.mp3`、`.build/cache/*.pyz`、
+  `__pycache__/*.pyc`、`Thumbs.db`、`setup.lnk`、`stray.wav`、根目录 `root-shot.png`、
+  `docs/other-shot.png` 与被放行的 `docs/images/mv-cover.png`。`git add -A --dry-run` 只收
+  `.gitignore / mv-cover.png / player.py / tests/t.py / 双语歌词.lrc`——音频、发布包、抓屏证据、
+  Windows 自身的 junk 一个没进来，`!` 例外确实生效。这条值得记是因为
+  `git check-ignore -v` 对**否定模式**也返回 0，只看 rc 会把"放行成功"读成"被忽略"。
+  再交叉核 `git ls-files -i -c --exclude-standard`（被跟踪又同时被忽略）为空。
+- 历史面：全量枚举"曾经出现在任何提交里的路径"，无任何音频/发布包扩展名；
+  `git count-objects -H` 报 size-pack 6.05 MiB（大头是上游那两个 PNG 的历史版本）。
+- **我自己差点交出一条假绿**：第一版历史扫描把 `git cat-file --batch $(cat blobs)` 重定向落盘，
+  结果是 **0 字节语料**，于是所有模式都"命中 0 次"——看着全干净，其实尺子量的是空集。
+  改法：先证实语料非空（8,061,811 字节），再加**必须命中的阳性对照**
+  （`System32`=4、`Windows.Media.Playback`=11、`world.execute`=195）；同一批对照也顺带证了
+  上一版 `git grep` 里 `[/\\]+` 与 `\\+` 不是一回事（后者漏了单反斜杠写法）。
+- 真找到的两处：
+  1. `docs/win-glyph-metrics.json` 的 `grab.png` 是本机绝对路径
+     `F:\AllProjects\playground\world.execute(me); —ascii\.build\calibrate-screen.png`，
+     而证据文件本来就在被忽略的 `.build/` 里——它对读者唯一的增量信息是那台机器的目录结构。
+     生产端 `win/calibrate.py:130` 改 `png.relative_to(ROOT).as_posix()`，测量值一行没动；
+     改完用 `json.load` 与生产端重算的字符串逐位相比对，并确认 `.build/calibrate-screen.png`
+     既是新值也真的存在。测试侧无人读这个键（`git grep win-glyph-metrics` 只有文档命中）。
+  2. `win/audioclock.ps1` 有一行中文注释，而该文件**无 BOM**——PowerShell 5.1 对无 BOM 的
+     .ps1 按 ANSI 码页解码，中文 Windows 上等于拿 cp936 读 UTF-8 字节。它落在注释里、行末是
+     `.` 不是反引号，所以既没改解析也没改行为（实测 `PSParser::Tokenize` 0 个解析错误，
+     音频门禁 21 项照绿），但它违反本仓库自己立的"这条链路上的脚本一律纯 ASCII"。
+     改完四个脚本的非 ASCII 行数全为 0。
+- README 那一行按用户要求并进上一次提交：先证实 `d90db2d` **不被任何远端包含**
+  （`git log --branches --not --remotes` 列出全部 4 个本地提交），才动 `--amend`；只 stage
+  `README.md`，`git diff d90db2d 8aa1fc1` 证明这次重写只动了那一行（+1/-1）。
+- 安全面结论：跟踪内容里机器路径 / 用户名 / 邮箱 / 密钥形状 0 命中（阳性对照先证尺子活着）；
+  所有 subprocess 调用都是 argv 列表、无 `shell=True`、无字符串拼命令；唯一的网络点是
+  `get_song.py` 里硬编码的 HTTPS Release 地址，且它**只从下载的包里读字节**（清单 JSON 与 mp3），
+  不 import 也不执行 `.pyz` 里的代码——下载物拿不到代码执行路径，也没有 zip 条目名落盘
+  （固定成员名 `archive.read(MEMBER)`，不存在 Zip Slip 面）。
+- 交给用户决定、我没有动的三件（都不是代码缺陷）：
+  1. `origin` 指向上游作者的仓库，`main` 跟踪 `origin/main` 且**领先 6 个提交**；此时
+     `git push` 会把这 6 个提交推别人的项目。`gh` 已登录为 AlexPeng07，发之前要先建自己的
+     仓库再把 remote 指过去。
+  2. 提交身份邮箱是 `alexpeng07@outlook.com`，推上去即永久可被抓取；换 GitHub noreply 要
+     重写这 6 个提交的身份。
+  3. `lyrics.json` / `双语歌词.lrc` / `双语字幕.srt` 是 Mili 歌词与译文的副本（上游本来就在
+     公开分发）；`.lrc`/`.srt` 程序不读、只为人服务，想缩小暴露面可以只把这两个移出跟踪。
+- 门禁当场重跑（不引用旧读数）：`test_win_render.py` 9 项 OK、852 次比较 3.8 s、对照物仍从固定
+  commit `9d8e815` 现取；`test_win_audio.py` 21 项 OK、**0 skipped**；`wt --fullscreen` 实播
+  60→68.04 s 共 196 帧、最坏一帧 12.1 ms（预算 41.7 ms）、179×56 由
+  `GetConsoleScreenBufferInfo(srWindow)` 报、backend=winrt、host=windows-terminal、
+  控制台模式 `0x1f7→0x191`。第二遍重跑两套件再次 9/21 全 OK。
+- 一条读数差异留着别糊：那次实播 `audio_ready_seconds` 读到 **3.54 s**，文档里的 2.45 s 是
+  安静机器上的数，当时同一台机器上并发跑着另一个进程；第二遍实播没重测这个字段。
+  文档不改（约 2.5 秒的量级仍成立），但"就绪时间会随并发上浮"记在这儿。
+- 一桩"看着像项目的错、其实是环境的"：门禁跑到一半工作区冒出字面名叫 `%SystemDrive%` 的目录，
+  里面是 Windows shell 缓存库（`cversions.2.db` 与几个 `{GUID}.2.ver…db`，共 984 KB）。
+  没有直接删——整体移到 `.build/stray-kept/` 留着。归因靠重跑：渲染门禁、单条音频用例、
+  完整音频门禁、`wt` 实播四步各跑一遍、每步之后查一次，**四次都没再出现**；
+  `win/launch.py` 的 `child_env()` 只抄 `os.environ` 再加 `PYTHONDONTWRITEBYTECODE`，
+  本机 `SYSTEMDRIVE`/`ProgramData` 都正常展开。判定：那是那一轮里并发的另一个进程留下的，
+  不是本项目门禁的行为，所以 `.gitignore` 不为它加规则。
+- 顺手把 README 的 `--report f.json` 改成 `--report .build\f.json`：文档教的落点正好在忽略规则
+  管不到的仓库根（`*.json` 不能整体忽略，`config.json` 要跟踪）。改完"跑出来的东西一律落在
+  被忽略的地方"这条规则没有反例了。`README` 与 `.gitignore` 本身都不是门禁的输入
+  （`git grep -IE "gitignore|README" -- '*.py' '*.ps1' '*.cmd'` 只命中 `get_song.py` 的一句
+  文档串，不是读文件）。
+
