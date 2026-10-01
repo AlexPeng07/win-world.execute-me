@@ -194,7 +194,7 @@ try {
     }
 } catch {
     # Anything the media engine throws mid-playback has to reach the parent as a message,
-    # not as a silent process exit that reads as "音频引擎意外退出".
+    # not as a silent process exit, which the parent can only report as "engine exited unexpectedly".
     Emit ('{{"error":"clock failed: {0}"}}' -f (Ascii (('' + $_.Exception.Message))))
     [Console]::Error.WriteLine('audioclock: ' + (Ascii (('' + $_.Exception.Message))))
     exit 6
