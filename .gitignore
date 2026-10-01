@@ -28,3 +28,8 @@ ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
 *.lnk
+
+# 同机并发的第三方进程偶尔会在工作区落下字面名为 %SystemDrive% 的目录，里面是
+# Windows shell 缓存库（cversions.2.db 等）。不是本项目的产物（单独重跑四步门禁
+# 不复现），但既然会出现在这里，就必须挡住，否则 `git add -A` 会把它收进提交。
+/%SystemDrive%/
