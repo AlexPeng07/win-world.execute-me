@@ -123,13 +123,11 @@ def measure_batch(plan, report, evidence=False):
     width, height, data, scan, lines = grab_and_segment(report)
     if evidence:
         # Keep the frame the numbers were actually measured from, not the summary screen.
-        bmp = ROOT/'.build'/'calibrate-screen.bmp'
         png = ROOT/'.build'/'calibrate-screen.png'
-        bmp.parent.mkdir(parents=True, exist_ok=True)
-        screenctl.write_bmp(bmp, width, height, data)
+        png.parent.mkdir(parents=True, exist_ok=True)
         screenctl.write_png(png, width, height, data)
         report['grab'] = {'width': width, 'height': height, 'dpi_mode': screenctl.DPI_MODE,
-                          'bmp': str(bmp), 'png': str(png)}
+                          'png': str(png)}
     if len(lines) != len(plan):
         report.setdefault('band_problems', []).append(
             {'expected': len(plan), 'found': len(lines), 'rows': [p[0] for p in plan]})

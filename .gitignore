@@ -1,24 +1,30 @@
+# 本仓库是 Windows 专用副本。这里的规则只回答一个问题：
+# 哪些东西是"跑出来的"或"受版权的"，因此不该进版本库。
+
+# 运行与测试产生的全部临时件（下载缓存、抓屏证据、报告 JSON）
+.build/
 __pycache__/
 *.py[cod]
-.DS_Store
-.build/
-dist/
-/audio-clock
-*.log
-*.mp4
-*.png
-*.jpg
-*.jpeg
-*.zip
-*.pyz
 
-
-# Local audio input is embedded only in release packages.
+# 音频：仓库不含音频，首次运行由 win/get_song.py 从官方 Release 包内解出并校验。
+# 原曲版权不属于本项目，任何情况下都不要提交音频。
 /media/
 *.mp3
 *.wav
 *.flac
 *.m4a
 
-# README artwork
+# 官方发布包本体（缓存在 .build/cache 下，这条兜住误放到根目录的情况）
+*.pyz
+
+# 抓屏/截图产物按体积默认忽略；README 封面是唯一有意入库的图片。
+# 需要新增展示图时，照下面这行的写法显式放行，别放开整类。
+*.png
 !/docs/images/mv-cover.png
+
+# Windows 自身在这些目录里留下的东西
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk

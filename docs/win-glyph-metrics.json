@@ -6,9 +6,15 @@
   "console": {
     "columns": 179,
     "rows": 56,
-    "source": "os.get_terminal_size(stdout)"
+    "source": "GetConsoleScreenBufferInfo(srWindow)"
   },
   "ambiguous_count": 34,
+  "grab": {
+    "width": 2560,
+    "height": 1600,
+    "dpi_mode": "per-monitor-v2",
+    "png": "F:\\AllProjects\\playground\\world.execute(me); —ascii\\.build\\calibrate-screen.png"
+  },
   "cell_px": [
     14.2927,
     14.2927,
@@ -199,6 +205,5 @@
   "ambiguous_measured": 34,
   "ambiguous_wide": [],
   "unresolved": [],
-  "verdict": "ALL_NARROW",
-  "bmp": "F:\\AllProjects\\playground\\world.execute(me); —ascii\\.build\\calibrate-screen.bmp"
+  "verdict": "ALL_NARROW"
 }

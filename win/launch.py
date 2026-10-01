@@ -32,8 +32,6 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('mode', nargs='?', default='max', choices=sorted(FLAGS),
                         help='full = cover the taskbar, max = maximised window, win = plain window')
-    parser.add_argument('--player-arg', action='append', default=[],
-                        help='extra argument passed through to player.py (repeatable)')
     args = parser.parse_args()
 
     if ensure_song(sys.executable) != 0:
@@ -43,13 +41,13 @@ def main():
     terminal = shutil.which('wt.exe')
     if not terminal:
         print('Windows Terminal was not found; running in this console instead.', file=sys.stderr)
-        return subprocess.run([sys.executable, 'player.py'] + args.player_arg,
+        return subprocess.run([sys.executable, 'player.py'],
                               cwd=str(ROOT), env=child_env()).returncode
 
     # -d . keeps the repository path out of the command line entirely: this directory name
     # holds a semicolon, parentheses and a space, and wt uses ';' to split its own
     # arguments. Passing argv as a list means nothing has to be quoted by hand.
-    command = [terminal] + FLAGS[args.mode] + ['-d', '.', sys.executable, 'player.py'] + args.player_arg
+    command = [terminal] + FLAGS[args.mode] + ['-d', '.', sys.executable, 'player.py']
     print('launching: ' + ' '.join(command))
     return subprocess.run(command, cwd=str(ROOT), env=child_env()).returncode
 

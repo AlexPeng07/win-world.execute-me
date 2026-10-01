@@ -96,25 +96,6 @@ def grab(x=0, y=0, width=None, height=None):
         user32.ReleaseDC(wintypes.HWND(desktop), wintypes.HDC(source))
 
 
-def write_bmp(path, width, height, data):
-    """Save the grab as an uncompressed 24-bit BMP so any viewer can open the evidence."""
-    row_bytes = (width * 3 + 3) // 4 * 4
-    pixels = bytearray()
-    for y in range(height - 1, -1, -1):  # BMP stores bottom-up
-        start = y * width * 4
-        for x in range(width):
-            offset = start + x * 4
-            pixels += data[offset:offset + 3]
-        pixels += b'\x00' * (row_bytes - width * 3)
-    size = 54 + len(pixels)
-    header = struct.pack('<2sIHHI', b'BM', size, 0, 0, 54)
-    info = struct.pack('<IiiHHIIiiII', 40, width, height, 1, 24, BI_RGB, len(pixels), 1, 1, 0, 0)
-    path = str(path)
-    with open(path, 'wb') as handle:
-        handle.write(header + info + bytes(pixels))
-    return size
-
-
 def write_png(path, width, height, data):
     """Save the grab as an 8-bit RGB PNG using stdlib zlib, for evidence any viewer opens.
 

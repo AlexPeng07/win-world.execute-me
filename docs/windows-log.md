@@ -242,3 +242,42 @@
   取回的是 `aac5c7b48f663013` / 17303 字节（上游），当前被测文件是
   `a3096810c13a243f` / 25403 字节，**两者不同**，9/9 仍过。
 - 未做（有意）：单文件 `.pyz` Windows 包；N 版 Windows 与 legacy conhost 的实测。
+
+---
+
+## 收尾第二轮 · 2026-10-01 · 工作区整理、文档合一、死代码清除
+
+- **文档合一**：`WINDOWS.md` 删除，内容并入 `README.md`，README 重写为唯一的 Windows 文档
+  （上游出处与 commit、双击用法、键位、三档窗口、音频三段校验、目录结构、排障表、
+  实测数、重跑门禁、已知边界、版权）。上面几处提到 `WINDOWS.md` 的条目是**当时的事实**，
+  该文件现已不存在——按历史口径保留，不改写。
+- **`.gitignore` 按本机重写**：删掉 macOS/已消失的东西（`.DS_Store`、`/audio-clock`、`dist/`、
+  `*.log`、`*.mp4`、`*.jpg/jpeg`、`*.zip`），保留并加注说明真正需要的
+  （`.build/`、`/media/` 与音频扩展名、`*.pyz`、`*.png` + 封面单行放行），
+  补 Windows 自身落在目录里的东西（`Thumbs.db`、`Desktop.ini`、`$RECYCLE.BIN/`、`*.lnk`）。
+  规则改成一句话：**只忽略"跑出来的"和"受版权的"**。
+- **清中间件**：删 `.build/` 下已用完的验证产物（shotA/B/C 的 5 张 png 与 4 份报告 JSON、
+  `close_test.json`、`final.json`、`wt.json`）与两份没人读的 upstream 副本
+  （`lyrics_upstream.json`、`scenes_upstream.py`，删前 grep 确认零引用）。
+  **保留** `.build/pristine/player_upstream.py`（等价性对照物）与 `.build/cache/`
+  （`get_song` 的可用缓存，且缓存命中路径本身是被测过的）。
+- **死代码**：`player.py` 里 `TAU = math.tau`（唯一引用就是定义）连带 `math` 导入、
+  `ESC = '\x1b['`、`RED`（只在解包元组里出现，全仓零引用）一并删除；
+  删前用 AST 扫过 win/ 与 tests/ 的全部函数与类，除 unittest 测试类（由 runner 按名发现）
+  外无未引用定义；`screenctl` 里早先删掉的 `brightness_rows`/`ink_columns` 确认已不存在。
+- 三条判据的自证：删死代码后 `tests/test_win_render.py` 仍 9/9、852 次比较与上游逐字节相同
+  （证明删的确实与画面无关）；AST 复扫 `imported but unused` 为空；
+  `.gitignore` 重写后用 `git check-ignore -v` 复核 `media/song.mp3` 与
+  `.build/cache/world-execute-mv.pyz` 仍被挡住。
+
+### 收尾补记 · 又拆掉两处我自己加的东西
+
+- `win/launch.py` 的 `--player-arg` 透传：实测 `--player-arg --autoplay` 会被 argparse
+  当成"缺参数"而直接退出（以 `-` 开头的值必须写 `--player-arg=…`）。它没进文档、没有别的调用方，
+  属于我多加的功能，**删**，而不是给它写一条更别扭的用法说明。
+- `screenctl.write_bmp` 与 calibrate 里的 BMP 落盘：12 MB 的 BMP 与 19 KB 的 PNG 存的是同一帧，
+  而 PNG 编码器的正确性已经由"我真的打开看过四张抓屏"证明过，BMP 只是冗余。删函数 + 删证据字段，
+  `docs/win-glyph-metrics.json` 的 `grab` 现在只指一个真实存在的 png。
+- 删完复跑同一台同一字体：`ALL_NARROW / self_check ok / 34 个字形 / 控制组 1.98 /
+  cell_px 六批恒 14.2927`，与删除前逐项一致；真机 8 秒实播 198 帧 / 24.73 fps / 最坏帧 18.2 ms；
+  `win\launch.cmd max` 起窗口客户区 `[0,0,2560,1528]`，任务栏未被遮。

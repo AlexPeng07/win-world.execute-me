@@ -1,16 +1,14 @@
 #!/usr/bin/env python3
 """A terminal music video. Python standard library + Windows Media Foundation audio."""
 from __future__ import annotations
-import argparse, bisect, json, math, os, signal, subprocess
+import argparse, bisect, json, os, signal, subprocess
 import sys, threading, time, unicodedata
 from pathlib import Path
 
 from win import winconsole
 
 ROOT = Path(__file__).resolve().parent
-TAU = math.tau
-ESC = '\x1b['
-DIM, NORMAL, BRIGHT, WHITE, RED = 0, 1, 2, 3, 4
+DIM, NORMAL, BRIGHT, WHITE = 0, 1, 2, 3
 STYLES = {0:'\x1b[0;38;5;137m',1:'\x1b[0;38;5;215m',2:'\x1b[1;38;5;221m',3:'\x1b[1;38;5;230m',4:'\x1b[1;38;5;203m',5:'\x1b[0;38;5;94m',6:'\x1b[0;38;5;58m'}
 
 FONT = {
