@@ -127,7 +127,7 @@ def measure_batch(plan, report, evidence=False):
         png.parent.mkdir(parents=True, exist_ok=True)
         screenctl.write_png(png, width, height, data)
         report['grab'] = {'width': width, 'height': height, 'dpi_mode': screenctl.DPI_MODE,
-                          'png': str(png)}
+                          'png': png.relative_to(ROOT).as_posix()}
     if len(lines) != len(plan):
         report.setdefault('band_problems', []).append(
             {'expected': len(plan), 'found': len(lines), 'rows': [p[0] for p in plan]})
