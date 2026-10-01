@@ -408,6 +408,29 @@
   `git ls-files -i -c` 仍为空（没有任何被跟踪文件被新规则误伤）。
   删掉的这份工作区副本是可再生的 shell 缓存，真身在 `C:\ProgramData\Microsoft\Windows\Caches`，
   没有被碰。
+- **判据作废与重跑**：上面"两次都 0 findings，故不再重跑第三遍"那句已经不成立——加完
+  `/%SystemDrive%/` 之后终端提交集又前进了两个（`8188168`、`e33ee2d`）。"覆盖到哪"不能靠推断，
+  所以在 `e33ee2d` 上真跑了第三遍 L3，仍 0 findings。教训写在这儿：口径里写"不重跑"必须同时写清
+  它成立的条件；条件一变，旧句子立刻变成假陈述，宁可重跑一次也别留一句过期的"已覆盖"。
+- 第八轮 · 发布：用户给出目标仓库 `https://github.com/AlexPeng07/win-world.execute-me.git`。
+  推之前实测四件事：仓库存在且 `isEmpty=true`（不会覆盖别人的东西）、`viewerPermission=ADMIN`、
+  gh 的 git 凭据助手已配好（不需要弹窗认证）、本地工作树干净。
+  remote 处理成 `origin`=用户仓库、`upstream`=原作者仓库（改名保留出处，不丢可取回的历史）。
+- 发布后对账拿的是**发出去的东西**本身，不是本地状态：
+  `git ls-remote` 的 `refs/heads/main` == 本地 HEAD（`e33ee2d2…`）；
+  远端 recursive tree 共 25 个 blob，与本地 `git ls-files` **逐行相同**（多一个少一个都会红），
+  其中无 `media/`、无 `.build/`、无 `__pycache__`、无任何 `mp3/wav/flac/m4a/pyz`；
+  最大两块是封面图 3,048,987 字节与 `spectrum.json` 1,778,342 字节；
+  远端 `commits` 列表 20 条与本地 `git rev-list --count main`=20 一致，且对照物
+  `9d8e815`（作者 2026-09-28）在远端可达——这条是硬约束：等价性门禁要 `git show 9d8e815:player.py`，
+  squash 成孤儿初始提交会让它当场红（干净克隆那一步已经把整个链路跑通了）。
+  远端 README 第 5 行确实带着用户新加的"改编者AlexPeng07"。
+- 发布面留给用户知道的三件事，都不是缺陷：仓库 `private=false`（GitHub 显示 PUBLIC），
+  `lyrics.json`/`双语歌词.lrc`/`双语字幕.srt` 是 Mili 歌词与译文副本并随仓库公开分发；
+  仓库**没有任何 LICENSE 文件**（上游本来也没给），README 的"来历与版权"是唯一立场声明；
+  提交身份邮箱 `alexpeng07@outlook.com` 随 9 个提交公开（上游历史里另有作者自己的
+  `408207212@qq.com`，那是 GitHub 上原本就公开的东西）。
+
 
 
 
