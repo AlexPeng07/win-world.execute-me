@@ -430,6 +430,14 @@
   仓库**没有任何 LICENSE 文件**（上游本来也没给），README 的"来历与版权"是唯一立场声明；
   提交身份邮箱 `alexpeng07@outlook.com` 随 9 个提交公开（上游历史里另有作者自己的
   `408207212@qq.com`，那是 GitHub 上原本就公开的东西）。
+- 发布之后另一次账号侧变更（记在这儿，免得将来有人对着 `git log` 困惑"作者邮箱怎么中途换了"）：
+  GitHub 账号开启 "Keep my email addresses private" 与 "Block command line pushes that expose my
+  email"，本机 `git config --global user.email` 改为 `309235349+AlexPeng07@users.noreply.github.com`。
+  上面那句"随 9 个提交公开"是当时口径，实际本仓库带旧邮箱的提交已随收尾提交涨到 10 个，
+  按追加不改写的规矩旧句留着。**已公开的这些提交不做重写**——GitHub 设置页自己写着
+  "Previously authored commits associated with a public email will remain public"，重写只是止损。
+  从本条之后的提交都应带 noreply 地址；若某次推送被 GitHub 拒，先查提交里带的是哪个邮箱。
+
 
 
 
